@@ -1,0 +1,157 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body {
+        background-color: aqua;
+        background-image: url(wallpaper.webp);
+        background-repeat: no-repeat;
+        background-size: cover;
+
+    }
+
+    .box {
+        width: 350px;
+        /* height: 350px; */
+        border: 2px solid black;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 150px;
+        background-color: rgba(128, 128, 128, 0.397);
+        box-shadow: 5px 5px 6px rgb(16, 1, 34);
+        border-radius: 20px;
+        text-align: center;
+
+
+
+    }
+
+    .btn {
+
+        margin-top: 20px;
+        background-color: blue;
+        color: white;
+        width: 100px;
+        height: 25px;
+        border-radius: 20px;
+
+
+    }
+
+    .header {
+        text-align: center;
+
+    }
+
+
+
+
+
+    .bar {
+
+
+        width: 200px;
+        height: 30px;
+        padding: 8px;
+        border: 2px solid black;
+        border-radius: 20px;
+
+    }
+
+
+    .city {
+        text-align: center;
+    }
+
+    .country {
+        text-align: center;
+    }
+
+    .temp {
+        text-align: center;
+    }
+
+
+
+    .mode {
+        position: absolute;
+        top: 10px;
+        right: 40px;
+        padding: 2px;
+    }
+
+    .NightMode {
+        background-color: black;
+        color: whitesmoke;
+    }
+</style>
+
+<body>
+    <div class="container">
+        <div class="box">
+            <h1 class="header"> Weather APP</h1>
+
+
+            <input class="bar" type="search" name="search"><br>
+            <button class="btn">search </button>
+
+
+            <h1 class="city">lagos</h1>
+            <h3 class="country">Nigeria</h3>
+
+            <h3> <span class="temp">27</span> &deg;C</h3>
+
+
+            <h4 class="text">light rain</h4>
+        </div>
+    </div>
+
+    <button class="mode">Dark/Light</button>
+
+    <!-- js -->
+    <script>
+        let box = document.querySelector(".box")
+        let search = document.querySelector(".bar")
+        let btn = document.querySelector(".btn")
+
+        let city = document.querySelector(".city")
+        let country = document.querySelector(".country")
+        let temp = document.querySelector(".temp")
+        let text = document.querySelector(".text")
+
+        btn.addEventListener("click", () => {
+            let user_location = search.value.trim()
+
+            if (!user_location) {
+                return alert("please enter a city")
+            }
+
+
+            fetch(`http://api.weatherapi.com/v1/current.json?key=2326011866734ba591f100357252407&q=${user_location}&aqi=no`)
+                .then((response) => response.json())
+                .then((data) => {
+                    console.log(data)
+                    city.textContent = data.location.name
+                    country.textContent = data.location.country
+                    text.textContent = data.current.condition.text
+                    temp.textContent = data.current.temp_c
+                })
+        })
+
+        let htmbody = document.querySelector("body")
+        let changeModeBtn = document.querySelector(".mode")
+
+        changeModeBtn.addEventListener("click", () => {
+            htmbody.classList.toggle("NightMode")
+        })
+
+
+    </script>
+
+</body>
+
+</html>

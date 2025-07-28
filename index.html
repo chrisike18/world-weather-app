@@ -131,7 +131,7 @@
             }
 
 
-            fetch(`http://api.weatherapi.com/v1/current.json?key=2326011866734ba591f100357252407&q=${user_location}&aqi=no`)
+            fetch(`https://api.weatherapi.com/v1/current.json?key=2326011866734ba591f100357252407&q=${user_location}&aqi=no`)
                 .then((response) => response.json())
                 .then((data) => {
                     console.log(data)
